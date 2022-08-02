@@ -17,6 +17,7 @@ specifiers:
   eslint: ^8.21.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-prettier: ^4.2.1
+  fastify: ^4.3.0
   jest: 28.1.3
   lint-staged: ^13.0.3
   pnpm: ^7.8.0
@@ -38,6 +39,7 @@ dependencies:
   '@nestjs/core': 9.0.7_33m5b3m5yxauaifvpszi6cyz5m
   '@nestjs/platform-express': 9.0.7_xxlaro4n3ygapuy65e43lboh2y
   '@nestjs/platform-fastify': 9.0.7_xxlaro4n3ygapuy65e43lboh2y
+  fastify: 4.3.0
   reflect-metadata: 0.1.13
   rimraf: 3.0.2
   rxjs: 7.5.6
