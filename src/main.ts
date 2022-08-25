@@ -8,6 +8,7 @@ import { TransformInterceptor } from "./common/interceptors/transform.intercepto
 import { AllExceptionsFilter } from "./common/exceptions/base.exception.filter"
 import { HttpExceptionFilter } from "./common/exceptions/http.exception.filter"
 import { VersioningType } from "@nestjs/common"
+import { generateDocument } from "./doc"
 
 declare const module: any
 
@@ -16,11 +17,6 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter(),
   )
-
-  if (module.hot) {
-    module.hot.accept()
-    module.hot.dispose(() => app.close())
-  }
 
   app.enableVersioning({
     type: VersioningType.URI,
@@ -33,6 +29,15 @@ async function bootstrap() {
   // 注意引入自定义异常的先后顺序，不然异常捕获逻辑可能出现混乱
   app.useGlobalFilters(new AllExceptionsFilter(), new HttpExceptionFilter())
 
-  await app.listen(3000)
+  // 创建文档
+  generateDocument(app)
+
+  // 添加热更新
+  if (module.hot) {
+    module.hot.accept()
+    module.hot.dispose(() => app.close())
+  }
+
+  await app.listen(3333)
 }
 bootstrap()
